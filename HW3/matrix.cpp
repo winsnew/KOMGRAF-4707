@@ -2,18 +2,43 @@
 
 using namespace std;
 
-int determinant(int a, int b, int c, int d) {
-    return (a * d) - (b * c);
+void DDA(int x1, int y1, int x2, int y2) {
+    
+    int steps = abs(x2 - x1) > abs(y2 - y1) ? abs(x2 - x1) : abs(y2 - y1);
+
+    
+    float deltaX = (x2 - x1) / (float)steps;
+    float deltaY = (y2 - y1) / (float)steps;
+
+    
+    float x = x1;
+    float y = y1;
+
+    // titik awal
+    cout << "Titik awal: (" << x1 << ", " << y1 << ")" << endl;
+
+    // titik-titik selanjutnya
+    for (int i = 0; i < steps; i++) {
+        x += deltaX;
+        y += deltaY;
+        cout << "Titik ke-" << i + 1 << ": (" << round(x) << ", " << round(y) << ")" << endl;
+    }
 }
 
 int main() {
-    int a11 = 10, a12 = 1, a21 = 4, a22 = 1;
-    int b11 = 2, b12 = 10, b21 = 8, b22 = 12;
-    int detA = determinant(a11, a12, a21, a22);
-    int detB = determinant(b11, b12, b21, b22);
+    // Matriks A
+    int ax1 = 10, ay1 = 1, ax2 = 4, ay2 = 1;
 
-    cout << "Determinan matrix A: " << detA << endl;
-    cout << "Determinant matrix B: "<< detB << endl;
+    // Matriks B
+    int bx1 = 2, by1 = 10, bx2 = 8, by2 = 12;
+
+    
+    cout << "Matriks A:" << endl;
+    DDA(ax1, ay1, ax2, ay2);
+
+    
+    cout << "\nMatriks B:" << endl;
+    DDA(bx1, by1, bx2, by2);
 
     return 0;
 }
